@@ -1,0 +1,254 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Code Shop Documentation",
+        "description": "Api Documentation for use shop in code link",
+        "contact": {
+            "email": "support@codelink.com.sa"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://shop.shop.test/api/v1",
+            "description": "Test API Server"
+        },
+        {
+            "url": "https://shop.codelink.com.sa/api/v1",
+            "description": "Production API Server"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login User By Email",
+                "description": "Login User By Email && Password",
+                "operationId": "login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "LoginRequest",
+                                "description": "Auth Login Request body data",
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "email",
+                                    "password",
+                                    "phone"
+                                ],
+                                "properties": {
+                                    "device_id": {
+                                        "type": "string",
+                                        "example": "jhfgfjksldghkljaghalkjh"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "maxLength": 32,
+                                        "minLength": 6,
+                                        "example": "m@m.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "maxLength": 32,
+                                        "minLength": 6,
+                                        "example": "123123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Success User Login"
+                                        },
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "1|jhgjkhgjkahgjakdhgakjgakjg"
+                                        },
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Category": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Clothes"
+                    },
+                    "parent_id": {
+                        "type": "integer",
+                        "example": "44"
+                    },
+                    "tree_node_level": {
+                        "type": "integer",
+                        "example": "2"
+                    },
+                    "children": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Category"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Category"
+                }
+            },
+            "Product": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "فستان سهرة بيج بترتر و كتف واحد نسائي"
+                    },
+                    "categories": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Category"
+                        }
+                    },
+                    "images": {
+                        "type": "array",
+                        "items": {}
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Product"
+                }
+            },
+            "User": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "device_id": {
+                        "type": "string",
+                        "example": "jhfgfjksldghkljaghalkjh"
+                    },
+                    "full_name": {
+                        "type": "string",
+                        "example": "Mohamdd Abbduallah"
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "example": "Mohamed"
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "example": "Abdullah"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "+966533242200"
+                    },
+                    "provider": {
+                        "type": "string",
+                        "example": "google"
+                    },
+                    "provider_id": {
+                        "type": "string",
+                        "example": "uuid"
+                    },
+                    "image_url": {
+                        "type": "string",
+                        "example": "https://placeholder/image.png"
+                    },
+                    "email": {
+                        "description": "User unique email address",
+                        "type": "string",
+                        "format": "email",
+                        "example": "m@m.com"
+                    },
+                    "email_verified_at": {
+                        "description": "Datetime marker of verification status",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2019-02-25 12:59:20"
+                    },
+                    "created_at": {
+                        "description": "Datetime marker of create User account",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2019-02-25 12:59:20"
+                    },
+                    "updated_at": {
+                        "description": "Datetime marker of update User account",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2019-02-25 12:59:20"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "User"
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "API Endpoints of Auth"
+        },
+        {
+            "name": "Account",
+            "description": "API Endpoints of Account"
+        }
+    ],
+    "security": [
+        []
+    ]
+}
