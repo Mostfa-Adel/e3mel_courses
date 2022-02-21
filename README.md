@@ -9,7 +9,7 @@ simple courses application built by laravel
 first you must have php 7.4 and composer
 download source code and install dependencies  
 ```sh 
-git clone http://github.com/Mostfa-Adel
+git clone http://github.com/Mostfa-Adel/e3mel_courses
 ```
 install dependencies 
 ```sh 
